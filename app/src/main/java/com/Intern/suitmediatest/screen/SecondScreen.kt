@@ -24,6 +24,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -84,7 +85,10 @@ fun SecondScreenContent(
             Text(
                 fontSize = 25.sp,
                 text = stringResource(id = R.string.third_screen),
-                fontWeight = FontWeight.Bold
+                fontWeight = FontWeight.Bold,
+                textAlign = TextAlign.Center,
+                modifier = Modifier
+                    .fillMaxWidth()
             )
         }
         Spacer(modifier = Modifier.height(20.dp))
@@ -102,6 +106,7 @@ fun SecondScreenContent(
             fontSize = 25.sp,
             text = if (selectedUserName.isNotEmpty()) selectedUserName else stringResource(id = R.string.selected_username),
             fontWeight = FontWeight.Bold,
+            textAlign = TextAlign.Center,
             modifier = Modifier
                 .fillMaxWidth()
         )
