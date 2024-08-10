@@ -2,6 +2,7 @@ package com.Intern.suitmediatest.component
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -22,6 +23,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -33,8 +35,9 @@ import com.Intern.suitmediatest.ui.theme.SuitmediaTestTheme
 @Composable
 fun UserItem(
     data: DataItem,
-    modifier: Modifier = Modifier
-    ){
+    modifier: Modifier = Modifier,
+    onClick: () -> Unit
+){
     Column(
         modifier = modifier
             .background(Color.White)
@@ -46,6 +49,7 @@ fun UserItem(
                 shape = RoundedCornerShape(size = 10.dp)
             )
             .padding(12.dp)
+            .clickable { onClick() }
     ) {
         Row(
             modifier = modifier
@@ -53,7 +57,7 @@ fun UserItem(
         ) {
             AsyncImage(
                 model = data.avatar,
-                contentDescription = stringResource(R.string.profile),
+                contentDescription = stringResource(id = R.string.profile),
                 contentScale = ContentScale.Crop,
                 modifier = modifier
                     .height(64.dp)
@@ -68,12 +72,14 @@ fun UserItem(
                     Text(
                         text = data.firstName.toString(),
                         color = Color.Black,
+                        fontWeight = FontWeight.Bold,
                         modifier = Modifier.padding(end = 4.dp)
-
                     )
+                    Spacer(modifier = Modifier.width(6.dp))
                     Text(
                         text = data.lastName.toString(),
                         color = Color.Black,
+                        fontWeight = FontWeight.Bold,
                         modifier = Modifier.fillMaxWidth()
                     )
                 }
@@ -88,9 +94,11 @@ fun UserItem(
         }
     }
 }
+
 @Preview(showBackground = true, device = Devices.PIXEL_4)
 @Composable
 fun UserItemPreview(){
+
     MaterialTheme {
         val data = DataItem(
             id = 1,
@@ -101,7 +109,8 @@ fun UserItemPreview(){
         )
         UserItem(
             data = data,
-            modifier = Modifier
+            modifier = Modifier,
+            onClick = {}
         )
     }
 }

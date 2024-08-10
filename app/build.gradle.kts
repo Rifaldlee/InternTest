@@ -59,15 +59,22 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
+
+//Compose
     implementation (libs.coil.compose)
+    implementation("androidx.compose.ui:ui:1.6.8")
 
 // Retrofit
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
     implementation("com.squareup.okhttp3:logging-interceptor:4.11.0")
     implementation("com.google.code.gson:gson:2.11.0")
-    implementation(libs.androidx.runtime.livedata)
-    implementation(libs.androidx.material3.android)
+
+    implementation("androidx.compose.material:material:1.4.2")
+    implementation("androidx.compose.runtime:runtime-livedata:1.4.2")
+    implementation("androidx.paging:paging-compose:1.0.0-alpha17")
+    implementation("com.google.accompanist:accompanist-swiperefresh:0.28.0")
+
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

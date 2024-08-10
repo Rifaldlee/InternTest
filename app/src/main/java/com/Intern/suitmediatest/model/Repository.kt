@@ -14,16 +14,17 @@ import retrofit2.Response
 class Repository {
     private val apiService: ApiService = ApiConfig().getApiService()
 
-    fun getAllUsers(): LiveData<List<DataItem>> {
+    fun getAllUsers(page: Int = 1, perPage: Int = 10): LiveData<List<DataItem>> {
         val liveData = MutableLiveData<List<DataItem>>()
 
-        apiService.getListUsers().enqueue(object : Callback<UserResponse> {
+        apiService.getListUsers(page, perPage).enqueue(object : Callback<UserResponse> {
             override fun onResponse(call: Call<UserResponse>, response: Response<UserResponse>) {
                 if (response.isSuccessful) {
-                    liveData.value = (response.body()?.data ?: emptyList()) as List<DataItem>?
+                    liveData.value = response.body()?.data?.filterNotNull() ?: emptyList()
+                } else {
+                    Log.e("Repository", "Response failed: ${response.errorBody()?.string()}")
                 }
             }
-
             override fun onFailure(call: Call<UserResponse>, t: Throwable) {
                 Log.e("Repository", "onFailure: ${t.message}")
             }
